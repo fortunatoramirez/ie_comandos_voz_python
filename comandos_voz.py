@@ -22,11 +22,16 @@ matches = ["PRENDER", "ENCENDER", "SWITCH ON"]
 
 with mic as source:
     print("Grabando...")
-    #r.adjust_for_ambient_noise(source)
+    r.adjust_for_ambient_noise(source)
     audio = r.listen(source)
     print("Traduciendo...")
-    text = r.recognize_google(audio)
-    text = text.upper()
-    print(text)
-    if any(x in text for x in matches): #any or all
-        print("Prendiendo")
+    try:
+        text = r.recognize_google(audio)
+        text = text.upper()
+        print(text)
+        if any(x in text for x in matches): #any or all
+            print("Prendiendo")
+    except sr.UnknownValueError:
+        print("Google Cloud Speech no pudo entener el audio")
+    except sr.RequestError as e:
+        print("No es posible consultar el servivio de Google Cloud Speech; {0}".format(e))
