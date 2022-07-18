@@ -34,4 +34,4 @@ with mic as source:
     except sr.UnknownValueError:
         print("Google Cloud Speech no pudo entener el audio")
     except sr.RequestError as e:
-        print("No es posible consultar el servivio de Google Cloud Speech; {0}".format(e))
+        print("No es posible consultar el servicio de Google Cloud Speech; {0}".format(e))
